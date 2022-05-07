@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %} Movie Ratings Home {% endblock %}
+{% block body %}
+
+<h1>Welcome!</h1>
+
+<h2>Navigation</h2>
+<ul>
+  <li><a href="/movies">link1</a></li>
+  <li><a href="/users">link2</a></li>
+</ul>
+
+
+<h2>Select a Movie</h2>
+
+<p>
+    Your movie data:
+    <iframe width="560" height="315" src={{data}} frameborder="0" allowfullscreen></iframe>
+</p>
+
+{% endblock %}

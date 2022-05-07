@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %} Movie Ratings Home {% endblock %}
+{% block body %}
+
+<h1>Welcome!</h1>
+
+<h2>Navigation</h2>
+<ul>
+  <li><a href="/movies">link1</a></li>
+  <li><a href="/users">link2</a></li>
+</ul>
+
+
+<h2>Select a Movie</h2>
+<form action="/search">
+  <p>
+    Type in a movie title <input type="text" name="title">
+  </p>
+
+  <p>
+    <input type="submit">
+  </p>
+</form>
+
+{% endblock %}
