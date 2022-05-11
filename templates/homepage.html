@@ -12,7 +12,7 @@
 
 
 <h2>Select a Movie</h2>
-<form action="/search">
+<form action="/select-movie">
   <p>
     Type in a movie title <input type="text" name="title">
   </p>
@@ -20,6 +20,39 @@
   <p>
     <input type="submit">
   </p>
+</form>
+
+<br>
+
+<h2>Select a TV Show</h2>
+<form action="/select-tv">
+  <p>
+    Type in a movie title <input type="text" name="title">
+  </p>
+
+  <p>
+    <input type="submit">
+  </p>
+</form>
+
+<br>
+
+<h2>Search for Movie</h2>
+
+<form action="/search-movie">
+<div class="row">
+    <label for="genre">Genre</label>
+    <input id="genre" type="text" name="genre">
+</div>
+
+<div class="row">
+    <label for="streaming">Streaming Service</label>
+    <input id="streaming" type="text" name="streaming">
+</div>
+
+<p>
+    <input type="submit">
+</p>
 </form>
 
 {% endblock %}

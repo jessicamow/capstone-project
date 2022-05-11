@@ -11,11 +11,16 @@
 </ul>
 
 
-<h2>Select a Movie</h2>
+<h2>Results</h2>
 
 <p>
-    Your movie data:
-    <iframe width="560" height="315" src={{data}} frameborder="0" allowfullscreen></iframe>
+    {% for result in search_results %}
+        <p> Title: {{ result[0] }} </p>
+        <p> Overview: {{ result[1] }} </p>
+        <form action="/select-movie">
+            <input type="submit" name="title" value="{{ result[0] }}">Click for the movie trailer
+        </form>
+    {% endfor %}
 </p>
 
 {% endblock %}
