@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ user.email }}'s Page{% endblock %}
+
+{% block body %}
+<h1>{{ user.name }}'s watchlists</h1>
+<ul>
+{% for watchlist in user.watchlists %}
+    <a href="/watchlists/{{ watchlist.watchlist_id }}">
+        {{ watchlist.name }}
+    </a>
+{% endfor %}
+</ul>
+
+{% endblock %}

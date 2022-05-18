@@ -1,0 +1,22 @@
+[ 
+  {
+    "name": "Turning Red",
+    "type": "movie",
+    "watch_status": "Finished watching"
+  },
+  {
+    "name": "Severance",
+    "type": "tv",
+    "watch_status": "Finished watching"
+  },
+  {
+    "name": "Schitt's Creek",
+    "type": "tv",
+    "watch_status": "In progress"
+  },
+  {
+    "name": "Twenty Five Twenty One",
+    "type": "tv",
+    "watch_status": "Yet to begin"
+  }
+]

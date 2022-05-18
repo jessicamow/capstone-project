@@ -17,7 +17,7 @@
     {% for result in search_results %}
         <p> Title: {{ result[0] }} </p>
         <p> Overview: {{ result[1] }} </p>
-        <form action="/select-movie">
+        <form action="{{ form_name }}">
             <input type="submit" name="title" value="{{ result[0] }}">Click for the movie trailer
         </form>
     {% endfor %}

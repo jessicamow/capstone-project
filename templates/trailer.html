@@ -15,7 +15,25 @@
 
 <p>
     Your trailer:
-    <iframe width="560" height="315" src={{data}} frameborder="0" allowfullscreen></iframe>
+    <iframe width="560" height="315" src={{ media_info[0] }} frameborder="0" allowfullscreen></iframe>
 </p>
 
+<form action="/add-to-watchlist">
+  Watchlist name: <input type="text" name="watchlist-name">
+  <button type="submit" name="media-info" value="{{ media_info }}">Add this to your watchlist!</button>
+</form>
+<!-- <div id="app"></div> -->
+<br>
+<form action="/similar-media/{{ media_info[3] }}/{{ media_info[2] }}">
+  <button type="submit">View a similar media!</button>
+</form>
+<br>
+<form action="/media-search">
+  <button type="submit">Return to search input!</button>
+</form>
+
+{% endblock %}
+
+{% block js %}
+	<script src="/static/js/add-to-watchlist.jsx" type="text/jsx"></script>
 {% endblock %}

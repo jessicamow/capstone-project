@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+
+
+{% block body %}
+<h1>Watchlist name: {{ watchlist.name }}</h1>
+<ul>
+  {% for media in watchlist.media %}
+    {{ media.name }}
+  {% endfor %}
+</ul>
+
+{% endblock %}

@@ -6,53 +6,54 @@
 
 <h2>Navigation</h2>
 <ul>
-  <li><a href="/movies">link1</a></li>
-  <li><a href="/users">link2</a></li>
+  <li><a href="/media-search">Search for a specific show</a></li>
+  <li><a href="/media">See what others are watching</a></li>
 </ul>
 
+{% if not user %}
+  <h2>Create an Account</h2>
+  <form action="/users" method="POST">    
+    <p>
+      Name <input type="text" name="name">
+    </p>
+    <p>
+      Email <input type="text" name="email">
+    </p>
 
-<h2>Select a Movie</h2>
-<form action="/select-movie">
-  <p>
-    Type in a movie title <input type="text" name="title">
-  </p>
+    <p>
+      Password <input type="password" name="password">
+    </p>
 
-  <p>
-    <input type="submit">
-  </p>
-</form>
+    <p>
+      <input type="submit">
+    </p>
+  </form>
 
-<br>
+  <h2>Log In</h2>
+  <form action="/login" method="POST">
+    <p>
+      Email <input type="text" name="email">
+    </p>
 
-<h2>Select a TV Show</h2>
-<form action="/select-tv">
-  <p>
-    Type in a movie title <input type="text" name="title">
-  </p>
+    <p>
+      Password <input type="password" name="password">
+    </p>
 
-  <p>
-    <input type="submit">
-  </p>
-</form>
+    <p>
+      <input type="submit">
+    </p>
+  </form>
+{% endif %}
 
-<br>
+{% if user %}
 
-<h2>Search for Movie</h2>
+  {% for watchlist in user.watchlists %}
+    {{ watchlist.name }}
+    {% for media in watchlist.media %}
+      {{ media.name }}
+    {% endfor %}
+  {% endfor %}
 
-<form action="/search-movie">
-<div class="row">
-    <label for="genre">Genre</label>
-    <input id="genre" type="text" name="genre">
-</div>
-
-<div class="row">
-    <label for="streaming">Streaming Service</label>
-    <input id="streaming" type="text" name="streaming">
-</div>
-
-<p>
-    <input type="submit">
-</p>
-</form>
+{% endif %}
 
 {% endblock %}

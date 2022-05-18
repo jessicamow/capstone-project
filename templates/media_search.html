@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% block title %} Movie Ratings Home {% endblock %}
+{% block body %}
+
+<h1>Welcome!</h1>
+
+<h2>Navigation</h2>
+<ul>
+  <li><a href="/media-search">Search for a media</a></li>
+  <li><a href="/users">View all users</a></li>
+</ul>
+
+<h2>Create a Watchlist</h2>
+<form action="/create-watchlist" method="POST">
+    <p>
+      Watchlist Name: <input type="text" name="watchlist_name">
+      Watchlist Description: <textarea name="watchlist_desc"></textarea>
+    </p>
+  
+    <p>
+      <input type="submit">
+    </p>
+</form>
+
+<h2>Select a Movie</h2>
+<form action="/select-movie">
+  <p>
+    Type in a movie title <input type="text" name="title">
+  </p>
+
+  <p>
+    <input type="submit">
+  </p>
+</form>
+
+<br>
+
+<h2>Select a TV Show</h2>
+<form action="/select-tv">
+  <p>
+    Type in a movie title <input type="text" name="title">
+  </p>
+
+  <p>
+    <input type="submit">
+  </p>
+</form>
+
+<br>
+
+<h2>Search for Media</h2>
+
+<!-- <form action="/search-results"> -->
+<section id="search-by-criteria">
+<form>
+
+<input type="radio" name="media_type" value="movie" id="movie" class="media_type">
+<label for="move">Movie</label>
+<input type="radio" name="media_type" value="tv" id="tv" class="media_type">
+<label for="tv">TV Show</label>
+
+<label for="genre">Genre</label>
+<input list="genres" name="genre" id="genre">
+<datalist id="genres">
+  {% for genre in genres %}
+  <option value="{{ genre }}">
+  {% endfor %}
+</datalist>
+
+<label for="streaming">Choose your streaming service from the list:</label>
+<input list="streamings" name="streaming" id="streaming">
+<datalist id="streamings">
+    {% for streaming in streamings %}
+    <option value="{{ streaming }}">
+    {% endfor %}
+</datalist>
+
+<p>
+    <input type="submit">
+</p>
+</form>
+</section>
+
+<div id="results">
+
+</div>
+
+{% endblock %}
+
+{% block js %}
+<script src="/static/js/search-by-criteria.js"></script>
+{% endblock %}
