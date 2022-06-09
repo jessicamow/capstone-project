@@ -2,17 +2,53 @@
 {% block title %}All Media{% endblock %}
 
 {% block body %}
-  <h1>All Media</h1>
-
+  <h1>See what others are watching!</h1>
+  <br>
   <ul>
-    {% for media in all_media %}
-      <li>
-          {{ media.name }}
-          {% for watchlist in media.watchlists %}
-            {{ watchlist.user.name }}
+    <section id="filter-by-criteria">
+      <form>
+      <div>
+      <input type="radio" name="media_type" value="movie" id="filter-movie" class="filter-media-type">
+      <label for="filter-movie">Movie</label>
+      <input type="radio" name="media_type" value="tv" id="filter-tv" class="filter-media-type">
+      <label for="filter-tv">TV Show</label>
+      <input type="radio" name="media_type" value="both" id="filter-both" class="filter-media-type">
+      <label for="filter-both">Select All Media</label>
+      </div>
+
+      <div>
+      <label for="genre">Filter by Genre</label>
+      <input list="genres" name="genre" id="filter-genre">
+      <datalist id="genres">
+        {% for genre in genres %}
+        <option value="{{ genre }}">
+        {% endfor %}
+      </datalist>
+      </div>
+      
+      <div>
+      <label for="streaming">Filter by Streaming Service</label>
+      <input list="streamings" name="streaming" id="filter-streaming">
+      <datalist id="streamings">
+          {% for streaming in streamings %}
+          <option value="{{ streaming }}">
           {% endfor %}
-        
-      </li>
-    {% endfor %}
+      </datalist>
+      </div>
+      
+      <p>
+          <input type="submit">
+      </p>
+      </form>
+      </section>
   </ul>
+  <br>
+  <div id="media-results">
+
+  </div>
+
+{% endblock %}
+
+{% block js %}
+<script src="/static/js/view-media.js"></script>
 {% endblock %}

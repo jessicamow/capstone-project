@@ -2,21 +2,29 @@
   {
     "name": "Turning Red",
     "type": "movie",
-    "watch_status": "Finished watching"
+    "watch_status": "Finished watching",
+    "genres": ["Animation", "Comedy"],
+    "streamings": ["Disney Plus"]
   },
   {
     "name": "Severance",
     "type": "tv",
-    "watch_status": "Finished watching"
+    "watch_status": "Finished watching",
+    "genres": ["Thriller"],
+    "streamings": ["Apple TV"]
   },
   {
     "name": "Schitt's Creek",
     "type": "tv",
-    "watch_status": "In progress"
+    "watch_status": "In progress",
+    "genres": ["Comedy"],
+    "streamings": ["Netflix"]
   },
   {
     "name": "Twenty Five Twenty One",
     "type": "tv",
-    "watch_status": "Yet to begin"
+    "watch_status": "Yet to begin",
+    "genres": ["Drama", "Comedy"],
+    "streamings": ["Netflix"]
   }
 ]

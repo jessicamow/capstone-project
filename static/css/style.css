@@ -1,0 +1,137 @@
+.container-fluid {
+    background: url("/static/img/annie-spratt--lgZua7pnMQ-unsplash.jpg");
+    /* background-color:grey;   */
+    background-position: center;
+    background-size:cover;
+    background-repeat:no-repeat;
+    background-attachment: fixed;
+    /* Preserve aspet ratio */
+    height: 100%;
+    overflow-x: scroll;
+  } 
+
+  /* Optional: Makes the sample page fill the window. */
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: scroll; 
+  font-family: 'Montserrat', sans-serif;
+  color: black;
+  font-size: 15px;
+  font-weight: 300;
+  text-align: center;
+}
+
+  /* For Navbar  */
+.nav-link{
+    font-weight: bold;
+    font-style: italic;
+    font-size: 16px;
+    color: black;
+    font-weight: 300;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+h1{
+font-family: 'Syncopate', sans-serif;
+color: white;
+padding: 0px;
+font-size: 45px;
+font-weight: 900px;
+text-align: center;
+}
+
+#homepage-title {
+    font-size: 60px;
+}
+
+h2{
+    font-family: 'Montserrat', sans-serif;
+    color: black;
+    font-size: 20px;
+    text-align: center;
+    }
+
+p{
+    text-align: center;
+    }
+
+.create-watchlist-title {
+    font-size: 20px;
+    text-align: left;
+}
+
+.create-watchlist {
+    font-size: 15px;
+    text-align: left;
+}
+
+.watchlist {
+    border:5px solid #CAEBF2;
+    background: #F5FCFF;
+    opacity: 0.8;
+    text-align: left;
+}
+
+.watchlist p {
+    text-align: left;
+}
+
+.my-media {
+    text-align: left;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+}
+
+.search-forms, .search-forms p {
+    text-align: left;
+}
+
+.search-result-option {
+    border:5px solid #CAEBF2;
+    background: #F5FCFF;
+    opacity: 0.8;
+}
+
+.search-result-option p, form {
+    font-weight: bold;
+}
+
+iframe {
+    border: 10px solid #CAEBF2;
+}
+
+#results {
+    text-align: center;
+}
+
+.trailer-title {
+    text-align: left;
+    margin-left: 250px;
+}
+
+.trailer-options {
+    margin-top: 100px;
+    text-align: left;
+}
+
+.media-from-friends {
+    border:5px solid #CAEBF2;
+    background: #F5FCFF;
+    opacity: 0.8;
+}
+
+.media-from-friends div p {
+    font-weight: bold;
+}
+
+.your-media {
+    font-style: italic;
+}
+
+#log-out {
+    text-align: right;
+    align-items: right;
+}

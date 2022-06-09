@@ -1,16 +1,15 @@
 {% extends 'base.html' %}
-{% block title %} Movie Ratings Home {% endblock %}
+{% block title %} Scene It Home Page {% endblock %}
 {% block body %}
 
-<h1>Welcome!</h1>
-
-<h2>Navigation</h2>
-<ul>
-  <li><a href="/media-search">Search for a specific show</a></li>
-  <li><a href="/media">See what others are watching</a></li>
-</ul>
-
 {% if not user %}
+<div class="row">
+  <h1 id="homepage-title">scene it</h1>
+</div>
+<br>
+<br>
+<div class="row">
+  <div class="col">
   <h2>Create an Account</h2>
   <form action="/users" method="POST">    
     <p>
@@ -28,7 +27,9 @@
       <input type="submit">
     </p>
   </form>
+  </div>
 
+  <div class="col">
   <h2>Log In</h2>
   <form action="/login" method="POST">
     <p>
@@ -43,16 +44,83 @@
       <input type="submit">
     </p>
   </form>
+  </div>
+</div>
 {% endif %}
 
 {% if user %}
 
-  {% for watchlist in user.watchlists %}
-    {{ watchlist.name }}
-    {% for media in watchlist.media %}
-      {{ media.name }}
+<div class="row">
+  <div class="col-3">
+    <br>
+    <h2 class="create-watchlist-title">Create a Watchlist</h2>
+  <form action="/create-watchlist" method="POST">
+    <p class="create-watchlist">
+      Watchlist Name: <br> <input type="text" name="watchlist_name">
+      </p>
+      <p class="create-watchlist">
+      Watchlist Description: <br> <textarea name="watchlist_desc"></textarea>
+    </p>
+    <p class="create-watchlist">
+      <input type="submit">
+    </p>
+  </form>
+  </div>
+  <div class="col-6">
+    <h1 id="homepage-title">scene it</h1>
+  </div>
+  <div class="col-3" id="log-out">
+    <br>
+    <form action="/log-out" method="POST">
+    <p>
+      <button type="submit">Log Out</button>
+    </p>
+  </form>
+  </div>
+</div>
+
+<h2> Welcome, {{user.name}}! </h2>
+
+  {% if not user.watchlists %}
+    <p>
+      You have no content. Add some!
+    </p>
+  {% endif %}
+
+  {% if user.watchlists %}
+  <br>
+  <div class="row">
+    {% set status_index = 0 %}
+    {% for watchlist in user.watchlists %}
+    <div class="col-4 watchlist">
+      <p>
+        Watchlist Name: {{ watchlist.name }}
+      </p>
+      <p>
+        Description: {{ watchlist.description }}
+      </p>
+      <ul>
+      {% for media in watchlist.media %}
+        {% for status in watch_statuses %}
+        {% if status.media_id == media.media_id %}
+        {% set status = status.status %}
+        {% endif %}
+        {% endfor %}
+      <li><a class="nav-link my-media" href="/view-discussion-threads?media-name={{media.name}}">{{ media.name }} 
+        {% for status in watch_statuses %}
+        {% if status.media_id == media.media_id %}
+        ({{status.status}})
+        {% endif %}
+        {% endfor %}    
+        </a></li>
+      
+      {% endfor %}
+    </ul>
+    </div>
     {% endfor %}
-  {% endfor %}
+  </div>
+</div>
+  {% endif %}
 
 {% endif %}
 
