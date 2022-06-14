@@ -21,7 +21,6 @@ class User(db.Model):
     @classmethod
     def create(cls, name, email, password):
         """Create and return a new user."""
-
         return cls(name=name, email=email, password=password)
 
     @classmethod
@@ -31,10 +30,6 @@ class User(db.Model):
     @classmethod
     def get_by_email(cls, email):
         return cls.query.filter(User.email == email).first()
-
-    @classmethod
-    def all_users(cls):
-        return cls.query.all()
 
 
 class Watchlist(db.Model):
@@ -55,7 +50,6 @@ class Watchlist(db.Model):
     @classmethod
     def create(cls, name, description, user):
         """Create and return a new watchlist."""
-
         return cls(name=name, description=description, user=user)
 
     @classmethod
@@ -66,16 +60,6 @@ class Watchlist(db.Model):
     def get_by_info(cls, user, name):
         return cls.query.filter(Watchlist.user == user, Watchlist.name == name).first()
 
-    # @classmethod
-    # def get_by_email(cls, email):
-    #     return cls.query.filter(User.email == email).first()
-    @classmethod
-    def contains_media(cls, watchlist_id, media):
-        return cls.query.filter(Watchlist.watchlist_id == watchlist_id, Watchlist.media == media).first()
-
-    @classmethod
-    def all_watchlists(cls):
-        return cls.query.all()
 
 class MediaWatchlist(db.Model):
     """An association table for Media and Watchlist"""
@@ -85,17 +69,6 @@ class MediaWatchlist(db.Model):
     watchlist_id = db.Column(db.Integer, db.ForeignKey('watchlists.watchlist_id'))
     media_id = db.Column(db.Integer, db.ForeignKey('media.media_id'))
 
-    @classmethod
-    def create(cls, watchlist_id, media_id):
-        return cls(watchlist_id=watchlist_id, media_id=media_id)
-
-    @classmethod
-    def get_by_media_id(cls, media_id):
-        return cls.query.get(media_id)
-
-    @classmethod
-    def get_by_watchlist_id(cls, watchlist_id):
-        return cls.query.get(watchlist_id)
 
 class Media(db.Model):
     """A media"""
@@ -104,35 +77,21 @@ class Media(db.Model):
     media_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     name = db.Column(db.String)
     type = db.Column(db.String)
-    # duration = db.Column(db.Integer)
-    # api_id = db.Column(db.Integer)
-    # genre = db.Column(db.String)
-    # streaming_id = db.Column(db.Integer)
 
     genres = db.relationship('Genre', secondary='media_genres', backref='media')
     streamings = db.relationship('Streaming', secondary='media_streamings', backref='media')
     
-
     def __repr__(self):
         return f"<Media ID={self.media_id}, name={self.name}>"
 
-    @classmethod
+    @classmethod 
     def create(cls, name, type):
-        """Create and return a new user."""
-
+        """Create and return a new media."""
         return cls(name=name, type=type)
 
     @classmethod
     def get_by_name(cls, name):
         return cls.query.filter(Media.name == name).first()
-
-    @classmethod
-    def all_media(cls):
-        return cls.query.all()
-
-    @classmethod
-    def set_watch_status(cls):
-        Media.media_watchlists 
 
     @classmethod
     def filter_media(cls, type, genre, streaming):
@@ -169,8 +128,11 @@ class Genre(db.Model):
     @classmethod
     def create(cls, name):
         """Create and return a new genre type."""
-
         return cls(name=name)
+
+    @classmethod
+    def get_by_name(cls, name):
+        return cls.query.filter(Genre.name == name).first()
 
 
 class Streaming(db.Model):
@@ -185,9 +147,12 @@ class Streaming(db.Model):
 
     @classmethod
     def create(cls, name):
-        """Create and return a new genre type."""
-
+        """Create and return a new streaming service provider."""
         return cls(name=name)
+
+    @classmethod
+    def get_by_name(cls, name):
+        return cls.query.filter(Streaming.name == name).first()
 
 class WatchStatus(db.Model):
     """An table for Watch Statuses"""
@@ -203,13 +168,8 @@ class WatchStatus(db.Model):
 
     @classmethod
     def create(cls, user_id, media_id, status):
-        """Create and return a new genre type."""
-
+        """Create and return a new watch status."""
         return cls(user_id=user_id, media_id=media_id, status=status)
-
-    @classmethod
-    def all_statuses(cls):
-        return cls.query.all()
 
     @classmethod
     def get_status(cls, user_id, media_id):
@@ -244,8 +204,7 @@ class Comments(db.Model):
 
     @classmethod
     def create(cls, user_id, media_id, title, comment):
-        """Create and return a new genre type."""
-
+        """Create and return a new comment/discussion thread."""
         return cls(user_id=user_id, media_id=media_id, title=title, comment=comment)
 
     @classmethod
@@ -268,8 +227,7 @@ class Replies(db.Model):
 
     @classmethod
     def create(cls, user_id, comment_id, reply):
-        """Create and return a new genre type."""
-
+        """Create and return a new reply."""
         return cls(user_id=user_id, comment_id=comment_id, reply=reply)    
 
     @classmethod

@@ -4,6 +4,7 @@ document.querySelector('#search-by-criteria form').addEventListener('submit', (e
     const streamingService = document.querySelector("#streaming").value;
     const genre = document.querySelector("#genre").value;
     const mediaType = document.querySelector(".media_type:checked").value;
+
     fetch(`/search-results?media_type=${mediaType}&streaming=${streamingService}&genre=${genre}`)
         .then(response => response.json())
         .then(apiResponse => {
@@ -14,7 +15,6 @@ document.querySelector('#search-by-criteria form').addEventListener('submit', (e
               const resultsDiv = document.querySelector("#results");
               removeAllChildNodes(resultsDiv);
               resultsDiv.appendChild(insertResultsTitle)
-              console.log(searchResults.length)
               const insertRow = document.createElement("div")
               insertRow.setAttribute("class", "row")
               for (let i=0; i<searchResults.length; i++) {
@@ -29,18 +29,14 @@ document.querySelector('#search-by-criteria form').addEventListener('submit', (e
                 submit.setAttribute("type", "submit");
                 submit.setAttribute("name", "title")
                 results = searchResults[i][0].split(",")
-                console.log(results)
                 submit.setAttribute("value", `${[searchResults[i][0]]}`);
                 submit.setAttribute("id", `search-results-${searchResults[i][0]}`);
                 submit.innerText = "View Trailer";
                 form.appendChild(submit);
-                // trailerButton.appendChild(form);
                 insertCol.appendChild(insertTitle)
                 insertCol.appendChild(insertDescription)
                 insertCol.appendChild(form)
-                // resultsDiv.appendChild(insertTitle)
-                // resultsDiv.appendChild(insertDescription)
-                // resultsDiv.appendChild(form)
+
                 form.addEventListener('click', (evt) => {
                     evt.preventDefault();
 
@@ -93,6 +89,7 @@ function return_trailer(apiResponse) {
         mediaStreaming = apiResponse.media_data[6];
         const resultsDiv = document.querySelector("#results");
         removeAllChildNodes(resultsDiv);
+
         const insertMediaTitle = document.createElement("h2");
         insertMediaTitle.setAttribute("class", "trailer-title")
         insertMediaTitle.innerHTML = `Trailer for ${mediaName}`;
@@ -130,7 +127,6 @@ function return_trailer(apiResponse) {
         watchlistButton.setAttribute("type", "submit");
         watchlistButton.setAttribute("name", "media-data");
         watchlistButton.setAttribute("value", apiResponse.media_data);
-        console.log(apiResponse.media_data)
         watchlistButton.innerText = "Add To Watchlist";
         watchlistForm.appendChild(watchlistInput);
         watchlistForm.appendChild(watchlistButton);
@@ -154,20 +150,14 @@ function return_trailer(apiResponse) {
         watchlistForm.addEventListener('submit', (evt) => {
             evt.preventDefault();
 
-            console.log(watchlistInput.value)
-            console.log(watchlistButton.value)
-
             fetch(`/add-to-watchlist?watchlist-name=${watchlistInput.value}&media-data=${watchlistButton.value}`)
             .then(response => response.json())
             .then(response => {
-                console.log(response.message)
                 removeAllChildNodes(watchlistDiv)
-                const watchlistMsgDiv = document.createElement("div")
-                watchlistMsgDiv.setAttribute("class", "trailer-options")
                 const watchlistMsg = document.createElement("p")
+                watchlistMsg.setAttribute("class", "trailer-options")
                 watchlistMsg.innerHTML = `${response.message}`
-                watchlistMsgDiv.appendChild(watchlistMsg)
-                watchlistDiv.appendChild(watchlistMsgDiv)
+                watchlistDiv.appendChild(watchlistMsg)
             })
         })
       } else {

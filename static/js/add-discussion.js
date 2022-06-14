@@ -1,15 +1,12 @@
 document.querySelector("#new-discussion").addEventListener("click", (evt) => {
     evt.preventDefault();
 
-    console.log("new discussion")
-
     const discussion = document.querySelector("#add-discussion")
     removeAllChildNodes(discussion)
 
     const discussionPrompt = document.createElement("p")
     discussionPrompt.innerHTML = "Create a new discussion post!"
     const newDiscussion = document.createElement("form")
-    // newDiscussion.setAttribute("action", "/add-discussion-threads")
     const title = document.createElement("input")
     title.setAttribute("type", "textarea")
     title.setAttribute("name", "title")
@@ -43,7 +40,8 @@ document.querySelector("#new-discussion").addEventListener("click", (evt) => {
                 insertUser.appendChild(insertNewThread)
                 const discussionDiv = document.querySelector("#discussion")
                 discussionDiv.appendChild(insertUser)
-                // discussionDiv.appendChild(insertNewThread)
+                title.value = ""
+                post.value = ""
             })
     })
 })
@@ -53,15 +51,10 @@ const allDiscussionThreads = document.querySelectorAll(".discussion-button")
 for (const discussionThread of allDiscussionThreads) {
     discussionThread.addEventListener("click", (evt) => {
     evt.preventDefault()
-    console.log(discussionThread.value)
     fetch(`/view-individual-thread?comment_id=${discussionThread.value}`)
         .then(response => response.json())
         .then(response => {
             if (response.success) {
-                console.log("this worked")
-                console.log(response.title)
-                console.log(response.comment)
-                console.log(response.replies)
                 const discussionThread = document.querySelector("#discussion-thread")
                 removeAllChildNodes(discussionThread)
                 const insertTitle = document.createElement("h2")
@@ -95,7 +88,7 @@ for (const discussionThread of allDiscussionThreads) {
                         if (replyResponse.success) {
                             const newReply = document.createElement("p")
                             newReply.innerHTML = `${replyResponse.user_reply}: ${replyResponse.reply}`
-                            discussionThread.insertBefore(newReply, replyPrompt)
+                            discussionThread.insertBefore(newReply, insertReply)
                             reply.value = ""
                         }
                     })
@@ -109,7 +102,6 @@ document.querySelector("#update-status").addEventListener("click", (evt) => {
     evt.preventDefault();
 
     const updatedStatus = document.querySelector("#updated-status").value;
-    console.log(updatedStatus)
 
     fetch(`/update-status?updated-status=${updatedStatus}`)
         .then(response => response.json())

@@ -1,16 +1,13 @@
 .container-fluid {
     background: url("/static/img/annie-spratt--lgZua7pnMQ-unsplash.jpg");
-    /* background-color:grey;   */
     background-position: center;
     background-size:cover;
     background-repeat:no-repeat;
     background-attachment: fixed;
-    /* Preserve aspet ratio */
     height: 100%;
     overflow-x: scroll;
   } 
 
-  /* Optional: Makes the sample page fill the window. */
 html,
 body {
   height: 100%;

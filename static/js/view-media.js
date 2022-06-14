@@ -8,7 +8,6 @@ document.querySelector("#filter-by-criteria form").addEventListener('submit', (e
         .then(response => response.json())
         .then(response => {
             if (response.success) {
-                // console.log(response.friends_media)
                 const resultsDiv = document.querySelector("#media-results");
                 removeAllChildNodes(resultsDiv)
                 const insertRow = document.createElement("div")
@@ -18,24 +17,16 @@ document.querySelector("#filter-by-criteria form").addEventListener('submit', (e
                     insertCol.setAttribute("class", "col-4 media-from-friends")
                     const mediaRow = document.createElement("div")
                     mediaRow.setAttribute("class", "row")
-                    // const titleCol = document.createElement("div")
-                    // titleCol.setAttribute("class", "col")
                     const insertTitle = document.createElement("p");
                     insertTitle.innerHTML = `${media_name}`;
-                    // titleCol.appendChild(insertTitle)
                     mediaRow.appendChild(insertTitle)
-                    // resultsDiv.appendChild(insertTitle)
                     const users = []
                     const watch_statuses = []
-                    // console.log(info.type)
                     for ([key, val] of Object.entries(info.user_info)) {
-                        // console.log("key", key)
-                        // console.log("value", val)
                         users.push(val.user_name)
                         watch_statuses.push(val.watch_status)
                     }
-                    // console.log(users)
-                    // console.log(watch_statuses)
+        
                     const userCol = document.createElement("div")
                     userCol.setAttribute("class", "col-6")
                     const insertUser = document.createElement("p");
@@ -77,7 +68,6 @@ document.querySelector("#filter-by-criteria form").addEventListener('submit', (e
                         discussionSubmit.setAttribute("type", "submit");
                         discussionSubmit.setAttribute("name", "media-name")
                         discussionSubmit.setAttribute("value", `${media_name}`);
-                        // submit.setAttribute("id", `search-results-${result[0]}`);
                         discussionSubmit.innerText = "See Discussion Threads";
                         discussion.appendChild(discussionSubmit);
                         mediaRow.appendChild(discussion)
@@ -85,7 +75,6 @@ document.querySelector("#filter-by-criteria form").addEventListener('submit', (e
                     }
                     else {
                         const addBreak = document.createElement("br");
-                        console.log("part1:", info.type, media_name)
                         const watchlistDiv = document.createElement("div");
                         const watchlist = document.createElement("form");
                         const inputText = document.createElement("input");
@@ -96,7 +85,6 @@ document.querySelector("#filter-by-criteria form").addEventListener('submit', (e
                         submit.setAttribute("type", "submit");
                         submit.setAttribute("name", "media-info")
                         submit.setAttribute("value", `${media_name}~${info.type}`);
-                        // submit.setAttribute("id", `search-results-${result[0]}`);
                         submit.innerText = "Add To Watchlist";
                         watchlist.appendChild(inputText)
                         watchlist.appendChild(submit);
@@ -110,24 +98,18 @@ document.querySelector("#filter-by-criteria form").addEventListener('submit', (e
                         discussionSubmit.setAttribute("type", "submit");
                         discussionSubmit.setAttribute("name", "media-name")
                         discussionSubmit.setAttribute("value", `${media_name}`);
-                        // submit.setAttribute("id", `search-results-${result[0]}`);
                         discussionSubmit.innerText = "See Discussion Threads";
                         discussion.appendChild(discussionSubmit);
                         
                         mediaRow.appendChild(discussion)
-                        // resultsDiv.appendChild(discussion)
 
                         watchlist.addEventListener("submit", (evt) => {
                             evt.preventDefault();
-    
-                            console.log(submit.value)
                             const selected_media = submit.value.split("~")
-                            console.log(`/select-${selected_media[1]}?title=${selected_media[0]}`)
     
                             fetch(`/select-${selected_media[1]}?title=${selected_media[0]}`)
                             .then(response => response.json())
                             .then(response => {
-                                console.log(response)
                                 if (response.success) {
                                     const media_data = response.media_data;
     
@@ -138,8 +120,6 @@ document.querySelector("#filter-by-criteria form").addEventListener('submit', (e
                                         const watchlistMsg = document.createElement("p");
                                         watchlistMsg.innerText = `${watchlistResponse.message}`
                                         watchlistDiv.appendChild(watchlistMsg)
-                                        console.log(watchlistResponse)
-                                        console.log(watchlistResponse.message)
                                     })
                                 }
                             })
